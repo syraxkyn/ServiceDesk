@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ServiceDesk.Registration>
+
+<p>
+    @Html.ActionLink("Add New Registration", "AddRegistration")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditRegistration", new { customerid=item.CustomerID,productid = item.ProductCode }) |
+                @Html.ActionLink("Delete", "DeleteRegistration", new { customerid = item.CustomerID, productid = item.ProductCode }, new { onclick = "return confirm('Are sure wants to delete?');" })
+            </td>
+        </tr>
+    }
+
+</table> 

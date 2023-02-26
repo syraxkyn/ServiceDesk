@@ -1,0 +1,64 @@
+﻿@model ServiceDesk.Models.IncidentListViewModel
+
+<p>
+    @Html.ActionLink("Add New Incident", "AddIncident")
+</p>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Статус: </label>
+        @Html.DropDownList("status", Model.Statuses as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>IncidentID</th>
+        <th>CustomerID</th>
+        <th>ProductCode</th>
+        <th>TechID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>DateOpened</th>
+        <th>DateClosed</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Incidents)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncidentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOpened)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateClosed)
+            </td>
+            <td>
+                @Html.ActionLink("Resolve", "ResolveIncident", new { id = item.IncidentID }) |
+                @Html.ActionLink("Delete", "DeleteIncident", new { id = item.IncidentID }, new { onclick = "return confirm('Are sure wants to delete?');" })
+            </td>
+        </tr>
+    }
+
+</table> 
